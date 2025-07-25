@@ -1,0 +1,116 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Checklist de Diagnóstico - Uber Eats</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f7f9fc;
+            color: #333;
+        }
+        header {
+            background-color: #2f80ed;
+            color: white;
+            padding: 1rem 2rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        main {
+            max-width: 800px;
+            margin: 2rem auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        h2 {
+            font-size: 1.4rem;
+            margin-top: 2rem;
+            color: #2f80ed;
+        }
+        label {
+            display: block;
+            margin: 0.5rem 0;
+            cursor: pointer;
+        }
+        input[type="checkbox"] {
+            margin-right: 0.5rem;
+        }
+        button {
+            background-color: #2f80ed;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 2rem;
+        }
+        button:hover {
+            background-color: #2563eb;
+        }
+        .output {
+            margin-top: 2rem;
+            background: #e0f2fe;
+            padding: 1rem;
+            border-left: 4px solid #2f80ed;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Checklist de Diagnóstico - Uber Eats</h1>
+        <p>Guía para evaluación rápida de cuentas</p>
+    </header>
+    <main>
+        <form id="checklist">
+            <h2>Métricas</h2>
+            <label><input type="checkbox" name="item" value="conversiones"> Conversiones por debajo del benchmark</label>
+            <label><input type="checkbox" name="item" value="visibilidad"> Baja visibilidad en app</label>
+            <label><input type="checkbox" name="item" value="promociones"> Sin promociones activas</label>
+            <label><input type="checkbox" name="item" value="tiempos"> Tiempos de entrega altos</label>
+
+            <h2>Menú</h2>
+            <label><input type="checkbox" name="item" value="fotos"> Menú sin fotos</label>
+            <label><input type="checkbox" name="item" value="variedad"> Falta de variedad</label>
+            <label><input type="checkbox" name="item" value="precios"> Precios no competitivos</label>
+
+            <button type="button" onclick="mostrarSugerencias()">Generar sugerencias</button>
+        </form>
+        <div class="output" id="sugerencias" style="display:none;"></div>
+    </main>
+    <script>
+        function mostrarSugerencias() {
+            const items = document.querySelectorAll('input[name="item"]:checked');
+            const sugerencias = {
+                conversiones: "Revisar descripciones, promociones y combos destacados para mejorar conversiones.",
+                visibilidad: "Revisar cobertura horaria y posicionamiento. Activar promociones puede mejorar visibilidad.",
+                promociones: "Crear promociones de entrega gratis o combos para incentivar pedidos.",
+                tiempos: "Verificar SLA y tiempos de preparación; coordinar mejor con repartidores.",
+                fotos: "Agregar fotos profesionales al menú para mejorar atractivo visual.",
+                variedad: "Explorar agregar productos populares según tendencias de mercado.",
+                precios: "Comparar precios con competidores cercanos y ajustar si es necesario."
+            };
+
+            let html = "<h3>Acciones sugeridas:</h3><ul>";
+            items.forEach(item => {
+                html += "<li><strong>" + sugerencias[item.value] + "</strong></li>";
+            });
+            html += "</ul><p><strong>Email sugerido:</strong> Hola, te compartimos algunas recomendaciones basadas en el análisis actual para mejorar el rendimiento de tu cuenta.</p>";
+
+            document.getElementById("sugerencias").innerHTML = html;
+            document.getElementById("sugerencias").style.display = "block";
+        }
+    </script>
+</body>
+</html>
